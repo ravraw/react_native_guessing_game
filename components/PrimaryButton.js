@@ -1,28 +1,43 @@
+import { setStatusBarHidden } from "expo-status-bar";
 import { View, Text, StyleSheet, Pressable } from "react-native";
 
-const PrimaryButton = ({ title, onPress }) => {
+const PrimaryButton = ({ title, color, onPress }) => {
   return (
-    <Pressable onPress={onPress} android_ripple={{ color: "#000000" }}>
-      <View style={styles.button}>
+    <View style={styles.buttonOuter}>
+      <Pressable
+        style={({ pressed }) =>
+          pressed ? [styles.buttonInner, styles.pressed] : styles.buttonInner
+        }
+        onPress={onPress}
+        android_ripple={{ color: "white" }}
+      >
         <Text style={styles.buttonText}>{title}</Text>
-      </View>
-    </Pressable>
+      </Pressable>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
-  button: {
-    backgroundColor: "gray",
+  buttonOuter: {
+    backgroundColor: "white",
+    borderRadius: 10,
+    overflow: "hidden",
+  },
+  buttonInner: {
+    backgroundColor: "#FF8A65",
     padding: 5,
     borderRadius: 10,
     width: 100,
-    elevation: 5,
+    overflow: "hidden",
   },
   buttonText: {
     color: "white",
     textTransform: "uppercase",
     fontSize: 16,
     textAlign: "center",
+  },
+  pressed: {
+    opacity: 0.5,
   },
 });
 
